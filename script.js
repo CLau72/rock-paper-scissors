@@ -39,35 +39,79 @@ function selectWinner(computerChoice, playerChoice) {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
     DRAW`);
+    return 0;
+
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
     WIN`);
+    return 1;
+
   } else if (playerChoice === "rock" && computerChoice === "paper") {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
     LOSE`);
+    return -1;
+
   } else if (playerChoice === "paper" && computerChoice === "scissors") {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
     LOSE`);
+    return -1;
+
   } else if (playerChoice === "paper" && computerChoice === "rock") {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
     WIN`);
+    return 1;
+
   } else if (playerChoice === "scissors" && computerChoice === "rock") {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
     LOSE`);
+    return -1;
+
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
     WIN`);
+    return 1;
   }
 }
 
 function playRound() {
-  selectWinner(getComputerChoice(), getPlayerChoice());
+ return selectWinner(getComputerChoice(), getPlayerChoice());
 }
 
-playRound();
+function playGame() {
+  let playerScore = 0;
+  let computerScore = 0;
+
+  for (let roundCount = 0; roundCount < 5; roundCount++) {
+    const roundWinner = playRound();
+    if (roundWinner == 1) {
+      playerScore += 1;
+    } 
+    else if (roundWinner == -1) {
+      computerScore += 1;
+    }
+  }
+  if (playerScore > computerScore) {
+    alert(`You Win!
+    Your Score: ${playerScore}
+    Computer Score: ${computerScore}`);
+  }
+  else if (playerScore < computerScore) {
+    alert(`You Lose!
+    Your Score: ${playerScore}
+    Computer Score: ${computerScore}`);
+  }
+  else {
+    alert(`Draw!
+    Your Score: ${playerScore}
+    Computer Score: ${computerScore}`);
+  }
+
+}
+
+playGame();
