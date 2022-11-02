@@ -1,10 +1,38 @@
+const playerScoreboard = document.querySelector("#player-points")
+const computerScoreboard = document.querySelector("#computer-points")
 const playerChoices = document.querySelectorAll("button");
+const playerFeedback = document.querySelector(".feedback")
+let playerPoints = 0;
+let computerPoints = 0;
 
 playerChoices.forEach((button) => {
   button.addEventListener('click', () => {
-    playRound(getComputerChoice(), button.id);
+  let winner = playRound(getComputerChoice(), button.id)
+  if (winner === 1){
+    playerPoints++
+    playerScoreboard.textContent = playerPoints
+  }
+  else if (winner === -1) {
+    computerPoints++
+    computerScoreboard.textContent = computerPoints
+  };
+
+  if (playerPoints === 5) {
+    playerFeedback.textContent = "You Win the Game!";
+    playerPoints = 0;
+    computerPoints = 0;
+  }
+  else if (computerPoints === 5){
+    playerFeedback.textContent = "The Computer beat You ☹️"
+    playerPoints = 0;
+    playerScoreboard.textContent = playerPoints
+    computerPoints = 0;
+    computerScoreboard.textContent = computerPoints
+  }
+
   })
 })
+
 
 // Get the computer's choice
 function getComputerChoice() {
@@ -44,50 +72,44 @@ function getPlayerChoice() {
 
 function playRound(computerChoice, playerChoice) {
   if (playerChoice === computerChoice) {
-    alert(`You selected: ${playerChoice}
-    Computer selected: ${computerChoice}
-    DRAW`);
+    playerFeedback.textContent = `You picked ${playerChoice} and computer picked ${computerChoice}. It's a DRAW`;
+    console.log("draw")
     return 0;
 
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
-    alert(`You selected: ${playerChoice}
-    Computer selected: ${computerChoice}
-    WIN`);
+    playerFeedback.textContent = `You picked ${playerChoice} and computer picked ${computerChoice}. You WIN!`;
+    console.log("win")
     return 1;
 
   } else if (playerChoice === "rock" && computerChoice === "paper") {
-    alert(`You selected: ${playerChoice}
-    Computer selected: ${computerChoice}
-    LOSE`);
+    playerFeedback.textContent = `You picked ${playerChoice} and computer picked ${computerChoice}. You LOSE`;
+    console.log("lose")
     return -1;
 
   } else if (playerChoice === "paper" && computerChoice === "scissors") {
-    alert(`You selected: ${playerChoice}
-    Computer selected: ${computerChoice}
-    LOSE`);
+    playerFeedback.textContent = `You picked ${playerChoice} and computer picked ${computerChoice}. You LOSE`;
+    (console.log("lose"))
     return -1;
 
   } else if (playerChoice === "paper" && computerChoice === "rock") {
-    alert(`You selected: ${playerChoice}
-    Computer selected: ${computerChoice}
-    WIN`);
+    playerFeedback.textContent = `You picked ${playerChoice} and computer picked ${computerChoice}. You WIN!`;
+    console.log("win")
     return 1;
 
   } else if (playerChoice === "scissors" && computerChoice === "rock") {
-    alert(`You selected: ${playerChoice}
-    Computer selected: ${computerChoice}
-    LOSE`);
+    playerFeedback.textContent = `You picked ${playerChoice} and computer picked ${computerChoice}. You LOSE`;
+    console.log("lose")
     return -1;
 
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
-    alert(`You selected: ${playerChoice}
-    Computer selected: ${computerChoice}
-    WIN`);
+    playerFeedback.textContent = `You picked ${playerChoice} and computer picked ${computerChoice}. You WIN!`;
+    console.log("win")
     return 1;
   }
 }
 
-function playGame() {
+// Old play game code
+/* function playGame() {
   let playerScore = 0;
   let computerScore = 0;
 
@@ -116,5 +138,5 @@ function playGame() {
     Computer Score: ${computerScore}`);
   }
 
-}
+} */
 
