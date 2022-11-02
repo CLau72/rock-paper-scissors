@@ -1,3 +1,11 @@
+const playerChoices = document.querySelectorAll("button");
+
+playerChoices.forEach((button) => {
+  button.addEventListener('click', () => {
+    playRound(getComputerChoice(), button.id);
+  })
+})
+
 // Get the computer's choice
 function getComputerChoice() {
   const computerValue = Math.floor(Math.random() * 3);
@@ -34,7 +42,7 @@ function getPlayerChoice() {
 
 // Compare player choice and select winner
 
-function selectWinner(computerChoice, playerChoice) {
+function playRound(computerChoice, playerChoice) {
   if (playerChoice === computerChoice) {
     alert(`You selected: ${playerChoice}
     Computer selected: ${computerChoice}
@@ -79,16 +87,12 @@ function selectWinner(computerChoice, playerChoice) {
   }
 }
 
-function playRound() {
- return selectWinner(getComputerChoice(), getPlayerChoice());
-}
-
 function playGame() {
   let playerScore = 0;
   let computerScore = 0;
 
   for (let roundCount = 0; roundCount < 5; roundCount++) {
-    const roundWinner = playRound();
+    const roundWinner = playRound(getComputerChoice(),getPlayerChoice());
     if (roundWinner == 1) {
       playerScore += 1;
     } 
@@ -114,4 +118,3 @@ function playGame() {
 
 }
 
-playGame();
